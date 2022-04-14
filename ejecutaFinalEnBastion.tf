@@ -35,7 +35,7 @@ resource "null_resource" "ejecuta_final" {
   provisioner "remote-exec" {
     inline = [
       "echo ${null_resource.ejecuta_configura.id}",
-      "cd ansible1",
+      "cd sample-full-ansible",
       "ansible-playbook -i lista_hosts inicia.yaml -v -T 300"
     ]
   }

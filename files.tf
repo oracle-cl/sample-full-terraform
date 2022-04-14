@@ -27,11 +27,11 @@ locals {
       echo '${var.ssh_public_key}' >> .ssh/authorized_keys
       echo '${local.ssh_private_key}' > .ssh/id_rsa
       echo '${local.ssh_config}' > .ssh/config
-      echo '${base64decode(var.pem)}' >> .ssh/devops.pem
+      echo 'base64decode(var.pem)' >> .ssh/devops.pem
       chmod 0600 .ssh/*
-      rm -r -f ansible1
-      git clone ssh://devops.scmservice.sa-santiago-1.oci.oraclecloud.com/namespaces/oraclegermanpab/projects/martin/repositories/ansible1
-      cd ansible1
+      rm -r -f sample-full-ansible
+      git clone https://github.com/oracle-cl/sample-full-ansible.git
+      cd sample-full-ansible
       echo '${local.globales}' > globales.yaml
       echo '${local.linux}' > lista_hosts
       echo '${local.zip_file}' > roles/tns/files/wallet.zip.base64
