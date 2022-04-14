@@ -21,9 +21,6 @@ groupings:
       - ${cantidad}
       - ${password}
       - ${ssh_public_key}
-  - title: "Otras"
-    variables:
-      - ${pem}
 
 variables:
   apodo:
@@ -62,9 +59,6 @@ variables:
   password:
     visible: true
     type: password
-
-  pem:
-    visible: false
 
   ssh_public_key:
     type: oci:core:ssh:publickey

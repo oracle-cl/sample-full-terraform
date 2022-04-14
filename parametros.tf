@@ -11,6 +11,5 @@ variable "cantidad" {}
 
 variable "compartment_ocid" {}
 variable "ssh_public_key" {}
-#variable "pem" {}
 variable "region" {}
 

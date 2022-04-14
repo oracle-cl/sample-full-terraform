@@ -5,7 +5,7 @@ resource oci_core_instance c {
   create_vnic_details {
     assign_public_ip = "false"
     display_name = "${var.apodo}_app_${count.index}"
-    hostname_label = "app-${count.index}"
+    hostname_label = "${var.apodo}-app-${count.index}"
     skip_source_dest_check = "true"
     subnet_id              = var.redapp
   }
