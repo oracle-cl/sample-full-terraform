@@ -1,0 +1,117 @@
+title: Despliegue App GO
+description: Ejemplo despliegue App
+schemaVersion: 1.1.0
+version: "202008"
+groupings:
+  - title: "Ambiente"
+    variables:
+      - ${apodo}
+      - ${region}
+      - ${compartment_ocid}
+      - ${adomain}
+  - title: "Redes"
+    variables:
+      - ${vcn}
+      - ${reddmz}
+      - ${redapp}
+      - ${reddata}
+      - ${nsg}
+  - title: "App"
+    variables:
+      - ${cantidad}
+      - ${password}
+      - ${ssh_public_key}
+  - title: "Otras"
+    variables:
+      - ${pem}
+
+variables:
+  apodo:
+    type: string
+    minLength: 1
+    maxLength: 8
+    pattern: "[a-zA-Z0-9]"
+    default: "dev"
+    title: Nombre Ambiente
+    required: true
+
+  region:
+    type: oci:identity:region:name
+    title: Region
+    description: Region a Usar
+    required: true
+
+  compartment_ocid:
+    type: oci:identity:compartment:id
+    title: Compartment para Ambiente
+    description: Compartment para Ambiente
+    required: true
+
+  adomain:
+    type: oci:identity:availabilitydomain:name
+    title: Availability Domain
+    description: donde queda
+    required: true
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+
+  cantidad:
+    visible: true
+    type: string
+
+  password:
+    visible: true
+    type: password
+
+  pem:
+    visible: false
+
+  ssh_public_key:
+    type: oci:core:ssh:publickey
+    title: Llave de acceso ssh Publica
+    description: Llave Pública de Acceso SSH
+    required: true
+
+  vcn:
+    type: oci:core:vcn:id
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+    required: true
+    title: VCN
+    description: Seleccionar VCN
+
+  reddmz:
+    type: oci:core:subnet:id
+    required: true
+    title: Red DMZ
+    description: Red para LB
+    dependsOn:
+      vcnId: ${vcn}
+      compartmentId: ${compartment_ocid}
+
+  redapp:
+    type: oci:core:subnet:id
+    required: true
+    title: Red APP
+    description: Red para Maquina
+    dependsOn:
+      vcnId: ${vcn}
+      compartmentId: ${compartment_ocid}
+
+  reddata:
+    type: oci:core:subnet:id
+    required: true
+    title: Red DATOS
+    description: Red para Maquina
+    dependsOn:
+      vcnId: ${vcn}
+      compartmentId: ${compartment_ocid}
+
+  nsg:
+    type: oci:core:nsg:id
+    required: true
+    title: NSG autonomous
+    description: NSG asignada a BD
+    dependsOn:
+      vcnId: ${vcn}
+      compartmentId: ${compartment_ocid}
