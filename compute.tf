@@ -11,15 +11,12 @@ resource oci_core_instance c {
   }
   display_name = "${var.apodo}_app_${count.index}"
   metadata = { "ssh_authorized_keys" = local.ssh_public_key }
-  shape = "VM.Standard2.1"
-  #shape = "VM.Standard3.Flex"
-  #shape_config {
-    #ocpus = 1
-    #memory_in_gbs = 16
-  #}
+  shape = "VM.Standard.E4.Flex"
+  shape_config {
+    ocpus = 1
+    memory_in_gbs = 8
+  }
   source_details {
-    #source_type = "bootVolume"
-    #source_id   = oci_core_boot_volume.boot_fe.id
     source_type = "image"
     source_id   = local.imagen_dev
   }

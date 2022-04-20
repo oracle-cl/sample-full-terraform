@@ -24,7 +24,11 @@ resource oci_core_instance bastion {
        apodo     = var.apodo
        }
   #preserve_boot_volume = true
-  shape = "VM.Standard2.1"
+  shape = "VM.Standard.E4.Flex"
+  shape_config {
+    ocpus = 1
+    memory_in_gbs = 8
+  }
   source_details {
     source_type = "image"
     source_id   = local.imagen_dev
