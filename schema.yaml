@@ -1,5 +1,6 @@
 title: Despliegue App GO
 description: Ejemplo despliegue App
+informationalText: Ejemplo terraform + Ansible
 schemaVersion: 1.1.0
 version: "202008"
 groupings:
