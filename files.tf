@@ -25,6 +25,7 @@ locals {
       echo '${local.ssh_config}' > .ssh/config
       chmod 0600 .ssh/*
       rm -r -f sample-full-ansible
+      yum install -y git
       git clone https://github.com/oracle-cl/sample-full-ansible.git
       cd sample-full-ansible
       echo '${local.globales}' > globales.yaml
