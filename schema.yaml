@@ -54,10 +54,12 @@ variables:
       compartmentId: ${compartment_ocid}
 
   cantidad:
+    title: Cantidad de App Servers
     visible: true
     type: string
 
   password:
+    title: Password Database
     visible: true
     type: password
 
