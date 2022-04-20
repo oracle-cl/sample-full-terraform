@@ -1,8 +1,8 @@
 data "oci_core_images" "lista_images" {
 	compartment_id = var.compartment_ocid
 	#display_name = 
-	#operating_system = "Oracle Linux Cloud Developer"
-	operating_system = "Oracle Linux"
+	operating_system = "Oracle Linux Cloud Developer"
+	#operating_system = "Oracle Linux"
 	#operating_system_version 
 	shape = "VM.Standard.E4.Flex"
 	#state = 
