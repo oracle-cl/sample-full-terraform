@@ -10,7 +10,10 @@ resource oci_core_instance c {
     subnet_id              = var.redapp
   }
   display_name = "${var.apodo}_app_${count.index}"
-  metadata = { "ssh_authorized_keys" = local.ssh_public_key }
+  metadata = { 
+      ssh_authorized_keys = local.ssh_public_key
+      user_data = base64encode(local.cloudinit)
+  }
   shape = var.shape
   shape_config {
     ocpus = var.ocpu

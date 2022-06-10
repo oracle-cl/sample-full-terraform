@@ -18,8 +18,9 @@ resource oci_core_instance bastion {
 
   display_name = "${var.apodo}_bastion"
   metadata = { 
-          ssh_authorized_keys = local.ssh_public_key 
-          }
+      ssh_authorized_keys = local.ssh_public_key
+      user_data = base64encode(local.cloudinit)
+  }
   extended_metadata = { 
        apodo     = var.apodo
        }

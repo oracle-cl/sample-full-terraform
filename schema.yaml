@@ -2,7 +2,8 @@ title: Despliegue App GO
 description: Ejemplo despliegue App
 informationalText: Ejemplo terraform + Ansible
 schemaVersion: 1.1.0
-version: "202008"
+version: "20190304"
+#version: "202008"
 groupings:
   - title: "Ambiente"
     variables:
@@ -60,7 +61,11 @@ variables:
   cantidad:
     title: Cantidad de App Servers
     visible: true
-    type: string
+    type: integer
+    default: 1
+    minimum: 1
+    maximum: 8
+    required: true
 
   shape:
     type: oci:core:instanceshape:name
@@ -69,14 +74,16 @@ variables:
     description: Imagen
     dependsOn:
       compartmentId: ${compartment_ocid}
-      region: ${region}
-      availabilityDomain: ${adomain}
-      imageId: ${imagen}
+#      region: ${region}
+#      availabilityDomain: ${adomain}
+#      imageId: ${imagen}
 
   ocpu:
-    type: number
     title: Cantidad de OCPU (Aplica en shapes Flex)
+    type: integer
     default: 1
+    minimum: 1
+    maximum: 24
     required: false
 
   memoria:
@@ -85,7 +92,6 @@ variables:
     default: 15
     required: false
 
-  ssh_public_key:
   password:
     title: Password Database
     visible: true
