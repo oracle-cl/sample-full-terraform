@@ -12,6 +12,7 @@ groupings:
       - ${adomain}
   - title: "Redes"
     variables:
+      - ${comparedes}
       - ${vcn}
       - ${reddmz}
       - ${redapp}
@@ -20,6 +21,9 @@ groupings:
   - title: "App"
     variables:
       - ${cantidad}
+      - ${shape}
+      - ${ocpu}
+      - ${memoria}
       - ${password}
       - ${ssh_public_key}
 
@@ -58,6 +62,30 @@ variables:
     visible: true
     type: string
 
+  shape:
+    type: oci:core:instanceshape:name
+    required: true
+    title: Shape
+    description: Imagen
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+      region: ${region}
+      availabilityDomain: ${adomain}
+      imageId: ${imagen}
+
+  ocpu:
+    type: number
+    title: Cantidad de OCPU (Aplica en shapes Flex)
+    default: 1
+    required: false
+
+  memoria:
+    type: number
+    title: Cantidad de Memoria en GB (Aplica en shapes Flex)
+    default: 15
+    required: false
+
+  ssh_public_key:
   password:
     title: Password Database
     visible: true
@@ -69,10 +97,16 @@ variables:
     description: Llave Pública de Acceso SSH
     required: true
 
+  comparedes:
+    type: oci:identity:compartment:id
+    title: Compartment donde estan creadas las redes
+    description: Compartment donde estan creadas las redes
+    required: true
+
   vcn:
     type: oci:core:vcn:id
     dependsOn:
-      compartmentId: ${compartment_ocid}
+      compartmentId: ${comparedes}
     required: true
     title: VCN
     description: Seleccionar VCN
@@ -84,7 +118,7 @@ variables:
     description: Red para LB
     dependsOn:
       vcnId: ${vcn}
-      compartmentId: ${compartment_ocid}
+      compartmentId: ${comparedes}
 
   redapp:
     type: oci:core:subnet:id
@@ -93,7 +127,7 @@ variables:
     description: Red para Maquina
     dependsOn:
       vcnId: ${vcn}
-      compartmentId: ${compartment_ocid}
+      compartmentId: ${comparedes}
 
   reddata:
     type: oci:core:subnet:id
@@ -102,7 +136,7 @@ variables:
     description: Red para Maquina
     dependsOn:
       vcnId: ${vcn}
-      compartmentId: ${compartment_ocid}
+      compartmentId: ${comparedes}
 
   nsg:
     type: oci:core:nsg:id
@@ -111,4 +145,4 @@ variables:
     description: NSG asignada a BD
     dependsOn:
       vcnId: ${vcn}
-      compartmentId: ${compartment_ocid}
+      compartmentId: ${comparedes}
