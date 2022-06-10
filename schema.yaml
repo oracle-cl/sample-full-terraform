@@ -96,6 +96,7 @@ variables:
     title: Password Database
     visible: true
     type: password
+    required: true
 
   ssh_public_key:
     type: oci:core:ssh:publickey

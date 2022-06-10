@@ -14,6 +14,11 @@ locals {
      [linux]
      ${join("\n", local.paso )}
      EOF
+   test_autonomous = <<-EOF
+     #!/bin/bash 
+     export TNS_ADMIN=/home/opc/tns
+     sqlplus admin/${var.password}@${var.apodo}_medium
+     EOF
    ssh_config = <<-EOF
      Host *
         StrictHostKeyChecking no
@@ -31,6 +36,7 @@ locals {
       echo '${local.globales}' > globales.yaml
       echo '${local.linux}' > lista_hosts
       echo '${local.zip_file}' > roles/tns/files/wallet.zip.base64
+      echo '${local.test_autonomous}' > test_autonomous.sh
       echo FIN CONFIG Inicial
       EOF
 }

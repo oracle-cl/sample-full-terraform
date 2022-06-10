@@ -1,6 +1,6 @@
 locals {
   cloudinit = <<EOF
 #!/bin/bash -x
-echo "${password}\n${password}" | passwd opc
+echo "${var.password}" | passwd opc --stdin
 EOF
 }
