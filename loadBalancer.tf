@@ -1,4 +1,4 @@
-resource "oci_load_balancer" "lb1" {
+resource oci_load_balancer lb1 {
   shape          = "10Mbps"
   compartment_id = var.compartment_ocid
   subnet_ids = [ var.reddmz ] 
@@ -6,7 +6,7 @@ resource "oci_load_balancer" "lb1" {
   #network_security_group_ids = [var.gruposec]
 }
 
-resource "oci_load_balancer_backend_set" "lb-bes1" {
+resource oci_load_balancer_backend_set lb-bes1 {
   name             = "lb-bes1"
   load_balancer_id = oci_load_balancer.lb1.id
   policy           = "ROUND_ROBIN"
@@ -24,7 +24,7 @@ resource "oci_load_balancer_backend_set" "lb-bes1" {
 
 
 
-resource "oci_load_balancer_listener" "lb-listener1" {
+resource oci_load_balancer_listener lb-listener1 {
   load_balancer_id         = oci_load_balancer.lb1.id
   name                     = "http"
   port                     = 80
@@ -32,7 +32,7 @@ resource "oci_load_balancer_listener" "lb-listener1" {
   default_backend_set_name = oci_load_balancer_backend_set.lb-bes1.name
 }
 
-resource "oci_load_balancer_backend" "test_backend" {
+resource oci_load_balancer_backend test_backend {
         count = var.cantidad
 	backendset_name = oci_load_balancer_backend_set.lb-bes1.name
 	ip_address = oci_core_instance.c[count.index].private_ip

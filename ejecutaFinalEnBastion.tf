@@ -1,4 +1,4 @@
-resource "null_resource" "ejecuta_configura" {
+resource null_resource ejecuta_configura {
   triggers = {
     always_run = "${timestamp()}"
     script_final = local.script_final
@@ -18,7 +18,7 @@ resource "null_resource" "ejecuta_configura" {
     ]
   }
 }
-resource "null_resource" "ejecuta_final" {
+resource null_resource ejecuta_final {
   triggers = {
     script_final = null_resource.ejecuta_configura.id
     always_run = "${timestamp()}"

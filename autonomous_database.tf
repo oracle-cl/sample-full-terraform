@@ -1,4 +1,4 @@
-resource "oci_database_autonomous_database" "adb" {
+resource oci_database_autonomous_database adb {
 	#Required
 	compartment_id = var.compartment_ocid
 	db_name = var.apodo
