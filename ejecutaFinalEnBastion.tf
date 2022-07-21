@@ -36,7 +36,7 @@ resource null_resource ejecuta_final {
     inline = [
       "echo ${null_resource.ejecuta_configura.id}",
       "cd sample-full-ansible",
-      "ansible-playbook -i lista_hosts inicia.yaml -v -T 300"
+      "echo ansible-playbook -i lista_hosts inicia.yaml -v -T 300i > test.txt"
     ]
   }
 }
